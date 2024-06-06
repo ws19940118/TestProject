@@ -44,6 +44,24 @@ func NewTestService() server.Server {
 			panic(err)
 		}
 	}()
+	/*//调用testservice->server.go的实例化服务器的方法
+	//server.WithServiceAdd():设置服务ip
+	//server.WithMuxTransport() 启用多路复用传输
+	//server.WithServerBasicInfo():设置服务名
+	//server.WithRegistry(r) :启用etcd
+	r, err := etcd.NewEtcdRegistry([]string{"192.168.1.12:100,192.168.1.13:101"}) // r should not be reused.
+	if err != nil {
+		fmt.Errorf("NewEtcdRegistry : %v", err)
+	}
+	fmt.Println("etcd-registry  ", zap.Any("addr", []string{"192.168.1.12:100,192.168.1.13:101"}))
+	result := testservice.NewServer(new(TestServiceImpl),
+		server.WithServiceAddr(utils.NewNetAddr("tcp", fmt.Sprintf("%s:", InternalIP()))),
+		server.WithRegistry(r),
+		server.WithMuxTransport(),
+		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: "TestService"}))
+	result.Run()
+	fmt.Println(addr.String())
+	return result*/
 	//调用testservice->server.go的实例化服务器的方法
 	//server.WithServiceAdd():设置服务ip
 	//server.WithMuxTransport() 启用多路复用传输
