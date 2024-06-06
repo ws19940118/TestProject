@@ -1,0 +1,24 @@
+syntax = "proto3"; //协议版本
+package pb;  //包名
+option go_package = "pb"; //生成代码路径
+
+message User {
+  string name = 1;
+  string age = 2;
+  string sex = 3;
+}
+message Teacher {
+  string name = 1;
+  string age = 2;
+  string sex = 3;
+}
+message InfoReq {
+  int64 id = 1;
+}
+message InfoResp {
+  User user = 1;
+  Teacher teacher = 2;
+}
+service TestService {
+  rpc GetInfo(InfoReq) returns (InfoResp);
+}
