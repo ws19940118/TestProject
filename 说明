@@ -1,13 +1,35 @@
 api--->protobuff协议：
-    1.1、使用proto
+    1.1、编写proto: ./api/game.proto
     1.1.：protobuf 编译器安装:
         1.macos系统（要代理喔）
-        安装Homebrew :/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        安装protoc   :     brew install protobuf
+            安装Homebrew :/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+            安装protoc   :     brew install protobuf
         2、安装kitex-tool
-        go install github.com/cloudwego/kitex/tool/cmd/kitex@latest
-        (运行->kitex和thrif版本兼容问题)： go get -u github.com/cloudwego/kitex
+            go install github.com/cloudwego/kitex/tool/cmd/kitex@latest
+            (运行->kitex和thrif版本兼容问题)： go get -u github.com/cloudwego/kitex
         3、自动生成代码（-modoule  (gomod文件的module路径)；-service后接 服务名 和 thrift 文件 ）
-        //thrift协议： kitex -module "github.com/cloudwego/kitex-examples" -service a.b.c hello.thrift
-        //proto协议：kitex -module "github.com/TestProject/api" -service TestService game.proto（引入包问题,go.mod）
-        自动生成代码： kitex -module=TestProject -type=protobuf game.proto(用这个命令，需要先cd到你对应的game.proto的目录)
+            //thrift协议： kitex -module "github.com/cloudwego/kitex-examples" -service a.b.c hello.thrift
+            //proto协议：kitex -module "github.com/TestProject/api" -service TestService game.proto（引入包问题,go.mod）
+            自动生成代码： kitex -module=TestProject -type=protobuf game.proto(用这个命令，需要先cd到你对应的game.proto的目录)
+        4.编写服务端代码
+            ./api/rpcServer目录下
+        5.编写客户端代码
+            ./api/client目录下
+
+
+thrift--->thrift协议
+    1.1编写thrift: ./thrift/game.thrift
+    1.1 thrift 编译器安装:
+        1.编译器安装
+                go install github.com/cloudwego/thriftgo@latest
+        2、安装kitex-tool
+                go install github.com/cloudwego/kitex/tool/cmd/kitex@latest
+                (运行->kitex和thrif版本兼容问题)： go get -u github.com/cloudwego/kitex
+        3、自动生成代码（-modoule  (gomod文件的module路径)；-service后接 服务名 和 thrift 文件 ）
+                 //thrift协议： kitex -module "github.com/cloudwego/kitex-examples" -service a.b.c hello.thrift
+                 //proto协议：kitex -module "github.com/TestProject/api" -service TestService game.proto（引入包问题,go.mod）
+                 自动生成代码： kitex -module=TestProject -type=thrift game.thrift(用这个命令，需要先cd到你对应的game.thrift的目录)
+       4.编写服务端代码
+            ./thrift/server目录下
+        5.编写客户端代码
+            ./thrift/client目录下
